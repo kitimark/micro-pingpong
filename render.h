@@ -116,3 +116,29 @@ void createBoard(x, y) {
       createPixel(x + i, y);
    }
 }
+
+// player 1
+void moveBoardPlayer1Left() {
+   player1 -= 1;
+   createPixel(player1, 0);
+   clearPixel(player1 + 4, 0);
+}
+
+void moveBoardPlayer1Right() {
+   player1 += 1;
+   createPixel(player1 + 3, 0);
+   clearPixel(player1 - 1, 0);
+}
+
+// player 2
+void moveBoardPlayer2Left() {
+   player2 -= 1;
+   createPixel(player2, 15);
+   clearPixel(player2 + 4, 15);
+}
+
+void moveBoardPlayer2Right() {
+   player2 += 1;
+   createPixel(player2 + 3, 15);
+   clearPixel(player2 - 1, 15);
+}

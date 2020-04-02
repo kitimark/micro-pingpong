@@ -34,7 +34,6 @@ void timer1_isr() {
 
 void bounchBall() {
 
-   createPixel(x, y);
    clearBall(x, y);
    
    // calculate next position
@@ -70,7 +69,19 @@ void main() {
    createBoard(player1, 0);
    createBoard(player2, 15);
    
+   
+   int8 i = 0;
    while(1) {
-      bounchBall();
+      controller();
+      
+      if (i == 0){
+         // create ball
+         createPixel(x, y);
+      }
+      i++;
+      if (i == 10){
+         bounchBall();
+         i = 0;
+      }
    }
 }
