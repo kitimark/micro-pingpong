@@ -52,32 +52,6 @@ void initialTRIS() {
    TRIS_DATA = 0;
 }
 
-void start(){
-   initialTRIS();
-   
-   int8 test = 0b11111011;
-   int8 x = 0;
-   int8 line = 0;
-//!   setX(0);
-   while(1){
-      CS1 = 1;
-      CS2 = 0;
-      setX(x);
-//!      delay_us(2);
-      setLine(line);
-//!      delay_us(1);
-      writeData(test);
-//!      delay_us(10);
-      x++;
-      if (x > 64) {
-         x = 0;
-         line++;
-         if (line > 8)
-            line = 0;
-      }
-   }
-}
-
 void initialBoard() {
    CS1 = 0;
    CS2 = 1;
