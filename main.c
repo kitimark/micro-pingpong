@@ -1,5 +1,5 @@
 //!#include <16F886.h>
-#include "lib.h" // render lib
+#include "render.h" // render lib
 
 #use delay(clock=4M)
 
