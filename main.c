@@ -30,6 +30,9 @@ int8 y = startY;
 int8 xVector = 1;
 int8 yVector = 1;
 
+int8 player1 = 6;
+int8 player2 = 6;
+
 void bounchBall() {
 
    createPixel(x, y);
@@ -49,13 +52,17 @@ void bounchBall() {
 void main() {
    initialTRIS();
    initialBoard();
-   initialLine();
+//!   initialLine();
    
    CS1 = 1;
    CS2 = 0;
    
    // wait for intial glcd module
    delay_us(1000);
+   
+   // initial players' board
+   createBoard(player1, 0);
+   createBoard(player2, 15);
    
    while(1) {
       bounchBall();

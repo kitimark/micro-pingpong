@@ -99,3 +99,9 @@ void initialLine() {
       createPixel(i, 15);
    }
 }
+
+void createBoard(x, y) {
+   for (int i = 0; i < 4; i++) {
+      createPixel(x + i, y);
+   }
+}
