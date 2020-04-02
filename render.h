@@ -1,22 +1,5 @@
-#include <16F886.h>
-#device ADC=10 *=16
-#FUSES NOWDT                    //No Watch Dog Timer
-#FUSES PUT                      //Power Up Timer
-#FUSES NOMCLR                   //Master Clear pin not enabled
-#FUSES NOPROTECT                //Code not protected from reading
-#FUSES NOCPD                    //No EE protection
-#FUSES BROWNOUT                 //Brownout reset
-#FUSES IESO                     //Internal External Switch Over mode enabled
-#FUSES FCMEN                    //Fail-safe clock monitor enabled
-#FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O
-#FUSES NODEBUG                  //No Debug mode for ICD
-#FUSES NOWRT                    //Program memory not write protected
-#FUSES BORV40                   //Brownout reset at 4.0V
-#FUSES RESERVED                 //Used to set the reserved FUSE bits
-#FUSES INTRC_IO
-
 #use delay(clock=4M)
-   
+
 #byte PORTA = getenv("SFR:PORTA")
 #byte TRISA = getenv("SFR:TRISA")
 #byte DATABYTE = getenv("SFR:PORTB")
@@ -56,7 +39,7 @@ void writeData(int8 test) {
    RS = 1;
    RW = 0;
    DATABYTE = test;
-   delay_us(1);
+   delay_ms(1);
    EN = 0;
 }
 
@@ -67,32 +50,6 @@ void initialTRIS() {
    TRIS_CS2 = 0;
    TRIS_EN = 0;
    TRIS_DATA = 0;
-}
-
-void start(){
-   initialTRIS();
-   
-   int8 test = 0b11111011;
-   int8 x = 0;
-   int8 line = 0;
-//!   setX(0);
-   while(1){
-      CS1 = 1;
-      CS2 = 0;
-      setX(x);
-//!      delay_us(2);
-      setLine(line);
-//!      delay_us(1);
-      writeData(test);
-//!      delay_us(10);
-      x++;
-      if (x > 64) {
-         x = 0;
-         line++;
-         if (line > 8)
-            line = 0;
-      }
-   }
 }
 
 void initialBoard() {

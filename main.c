@@ -1,29 +1,49 @@
-//!#include <16F886.h>
+#include <16F886.h>
+#device ADC=10 *=16
+#FUSES NOWDT                    //No Watch Dog Timer
+#FUSES PUT                      //Power Up Timer
+#FUSES NOMCLR                   //Master Clear pin not enabled
+#FUSES NOPROTECT                //Code not protected from reading
+#FUSES NOCPD                    //No EE protection
+#FUSES BROWNOUT                 //Brownout reset
+#FUSES IESO                     //Internal External Switch Over mode enabled
+#FUSES FCMEN                    //Fail-safe clock monitor enabled
+#FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O
+#FUSES NODEBUG                  //No Debug mode for ICD
+#FUSES NOWRT                    //Program memory not write protected
+#FUSES BORV40                   //Brownout reset at 4.0V
+#FUSES RESERVED                 //Used to set the reserved FUSE bits
+#FUSES INTRC_IO
+
 #include "render.h" // render lib
 
 #use delay(clock=4M)
 
 
-void bounchBall(startX, startY, endX, endY) {
-   int8 x = startX;
-   int8 y = startY;
-   
-   int8 xVector = 1;
-   int8 yVector = 1;
+const int8 startX = 0;
+const int8 startY = 1;
+const int8 endX = 15;
+const int8 endY = 14;
 
-   while (1) {
-      createBall(x, y);
-      clearBall(x, y);
-      
-      // calculate next position
-      if (x == endX) xVector = -1;
-      if (x == startX) xVector = 1;
-      x += xVector;
-      
-      if (y == endY) yVector = -1;
-      if (y == startY) yVector = 1;
-      y += yVector;
-   }
+int8 x = startX;
+int8 y = startY;
+int8 xVector = 1;
+int8 yVector = 1;
+
+void bounchBall() {
+
+   createBall(x, y);
+   clearBall(x, y);
+   
+   // calculate next position
+   if (x == endX) xVector = -1;
+   if (x == startX) xVector = 1;
+   x += xVector;
+   
+   if (y == endY) yVector = -1;
+   if (y == startY) yVector = 1;
+   y += yVector;
+
 }
 
 void main() {
@@ -37,12 +57,7 @@ void main() {
    // wait for intial glcd module
    delay_us(1000);
    
-   bounchBall(0, 1, 15, 14);
-   
-//!   while(1) {
-//!      for(int i = 0; i < 16; i++) {
-//!         createBall(i, i);
-//!         clearBall(i, i);
-//!      }
-//!   }
+   while(1) {
+      bounchBall();
+   }
 }
