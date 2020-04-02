@@ -32,8 +32,8 @@ int8 yVector = 1;
 
 void bounchBall() {
 
-   createBall(x, y);
-   clearBall(x, y);
+   createPixel(x, y);
+   clearPixel(x, y);
    
    // calculate next position
    if (x == endX) xVector = -1;

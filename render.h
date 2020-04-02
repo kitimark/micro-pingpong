@@ -72,7 +72,7 @@ void setPosition(int8 x, int8 y) {
    setLine(y/2);
 }
 
-void createBall(int8 x, int8 y) {
+void createPixel(int8 x, int8 y) {
    // create ball 4x4 ps
    setPosition(x, y);
    for(int i = 0; i < 4; i++) {
@@ -83,7 +83,7 @@ void createBall(int8 x, int8 y) {
    }
 }
 
-void clearBall(int8 x, int8 y) {
+void clearPixel(int8 x, int8 y) {
    setPosition(x, y);
    for(int i = 0; i < 4; i++) {
       writeData(0b00000000);
@@ -95,7 +95,7 @@ void initialLine() {
    CS2 = 0;
    
    for(int i = 0; i < 16; i++) {
-      createBall(i, 0);
-      createBall(i, 15);
+      createPixel(i, 0);
+      createPixel(i, 15);
    }
 }
