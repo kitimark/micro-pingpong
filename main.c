@@ -17,8 +17,20 @@
 
 #include "config.h"
 #include "render.h" // render lib
+#include "controller.h"
+
+#bit RP0 = STATUS.5
+#bit RP1 = STATUS.6
 
 #use delay(clock=4M)
+
+#INT_TIMER1
+void timer1_isr() {
+   set_timer1(65036); // re-set the timer1 counter to maintain a stable period
+   
+   counterColumeController();
+}
+
 
 void bounchBall() {
 
@@ -37,8 +49,15 @@ void bounchBall() {
 }
 
 void main() {
+   setup_timer_1(T1_INTERNAL | T1_DIV_BY_1);
+   set_timer1(65036);
+   enable_interrupts(INT_TIMER1);
+   enable_interrupts(GLOBAL);
+   
+   initialController();
    initialTRIS();
    initialBoard();
+
 //!   initialLine();
    
    CS1 = 1;
@@ -46,12 +65,12 @@ void main() {
    
    // wait for intial glcd module
    delay_us(1000);
-   
+
    // initial players' board
    createBoard(player1, 0);
    createBoard(player2, 15);
    
-   while(1) {  
+   while(1) {
       bounchBall();
    }
 }
