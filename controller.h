@@ -34,7 +34,7 @@ void initialController() {
 void controller() {
    // player 1 left
    if (prevC04 == 0 && PORTC == 0b00010101) {
-      moveBoardPlayer1Left();
+//!      moveBoardPlayer1Left();
       prevC04 = 1;
    }
    if (prevC04 == 1 && PORTC == 0b00000101) {
@@ -45,7 +45,7 @@ void controller() {
    // player 1 right
    if (prevC14 == 0 && PORTC == 0b00011010) {
 //!      PORTB = PORTB >> 1;
-      moveBoardPlayer1Right();
+//!      moveBoardPlayer1Right();
       prevC14 = 1;
    }
    if (prevC14 == 1 && PORTC == 0b00001010) {
@@ -56,7 +56,7 @@ void controller() {
    
       // player 2 left
    if (prevC05 == 0 && PORTC == 0b00100101) {
-      moveBoardPlayer2Left();
+//!      moveBoardPlayer2Left();
       prevC05 = 1;
    }
    if (prevC05 == 1 && PORTC == 0b00000101) {
@@ -66,7 +66,7 @@ void controller() {
    
    // player 2 right
    if (prevC15 == 0 && PORTC == 0b00101010) {
-      moveBoardPlayer2Right();
+//!      moveBoardPlayer2Right();
       prevC15 = 1;
    }
    if (prevC15 == 1 && PORTC == 0b00001010) {
