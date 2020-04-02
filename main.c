@@ -15,23 +15,10 @@
 #FUSES RESERVED                 //Used to set the reserved FUSE bits
 #FUSES INTRC_IO
 
+#include "config.h"
 #include "render.h" // render lib
 
 #use delay(clock=4M)
-
-
-const int8 startX = 0;
-const int8 startY = 1;
-const int8 endX = 15;
-const int8 endY = 14;
-
-int8 x = startX;
-int8 y = startY;
-int8 xVector = 1;
-int8 yVector = 1;
-
-int8 player1 = 6;
-int8 player2 = 6;
 
 void bounchBall() {
 
@@ -64,7 +51,7 @@ void main() {
    createBoard(player1, 0);
    createBoard(player2, 15);
    
-   while(1) {
+   while(1) {  
       bounchBall();
    }
 }
