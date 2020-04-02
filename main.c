@@ -23,7 +23,7 @@
 void bounchBall() {
 
    createPixel(x, y);
-   clearPixel(x, y);
+   clearBall(x, y);
    
    // calculate next position
    if (x == endX) xVector = -1;

@@ -90,6 +90,19 @@ void clearPixel(int8 x, int8 y) {
    }
 }
 
+void clearBall(int8 x, int8 y) {
+   setPosition(x, y);
+   for(int i = 0; i < 4; i++) {
+      if (y == 1 && (x >= player1 && x < player1 + 4)) {
+         writeData(0b00001111);
+      }
+      else if (y == 14 && (x >= player2 && x < player2 + 4)) {
+         writeData(0b11110000);
+      }
+      else writeData(0b00000000);
+   }
+}
+
 void initialLine() {
    CS1 = 1;
    CS2 = 0;
