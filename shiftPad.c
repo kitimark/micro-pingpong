@@ -17,10 +17,10 @@
 
 #use delay(clock=4M)
 
-#byte PORTC = getenv("SFR:PORTC")
-#byte TRIS_PORTC = getenv("SFR:TRISC")
-#byte PORTB = getenv("SFR:PORTB")
-#byte TRIS_PORTB = getenv("SFR:TRISB")
+#byte PORTC = getenv("SFR:PORTB")
+#byte TRIS_PORTC = getenv("SFR:TRISB")
+#byte PORTB = getenv("SFR:PORTC")
+#byte TRIS_PORTB = getenv("SFR:TRISC")
 #byte STATUS = getenv("SFR:STATUS")
 #bit RP0 = STATUS.5
 #bit RP1 = STATUS.6
@@ -30,6 +30,7 @@
 #bit PORTC4 = PORTC.4
 
 int prevC04 = 0;
+int prevC14 = 0;
 
 void setOutput(){
    TRIS_PORTB = 0b00000000;
@@ -49,14 +50,22 @@ void timer1_isr() {
 }
 
 void join(){
-      if(prevC04 != PORTC4 && PORTC0 == 1){
-         PORTB = PORTB << 1;
-         prevC04 = PORTC4;
-      }
-      if(prevC04 != PORTC4 && PORTC1 == 1){
-         PORTB = PORTB >> 1;
-         prevC04 = PORTC4;
-      }
+   if (prevC04 == 0 && PORTC == 0b00010001) {
+      PORTB = PORTB << 1;
+      prevC04 = 1;
+   }
+   if (prevC04 == 1 && PORTC == 0b00000001) {
+      PORTB = PORTB << 1;
+      prevC04 = 0;
+   }
+   if (prevC14 == 0 && PORTC == 0b00010010) {
+      PORTB = PORTB >> 1;
+      prevC14 = 1;
+   }
+   if (prevC14 == 1 && PORTC == 0b00000010) {
+      PORTB = PORTB >> 1;
+      prevC14 = 0;
+   }
 }
 
 void main(){
