@@ -79,7 +79,7 @@ void main() {
          createPixel(x, y);
       }
       i++;
-      if (i == 10){
+      if (i == 64){
          bounchBall();
          i = 0;
       }
