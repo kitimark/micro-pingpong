@@ -4,9 +4,9 @@
 #use delay(clock=4M)
 
 
-void bounchBall() {
-   int8 x = 0;
-   int8 y = 1;
+void bounchBall(startX, startY, endX, endY) {
+   int8 x = startX;
+   int8 y = startY;
    
    int8 xVector = 1;
    int8 yVector = 1;
@@ -16,12 +16,12 @@ void bounchBall() {
       clearBall(x, y);
       
       // calculate next position
-      if (x == 15) xVector = -1;
-      if (x == 0) xVector = 1;
+      if (x == endX) xVector = -1;
+      if (x == startX) xVector = 1;
       x += xVector;
       
-      if (y == 14) yVector = -1;
-      if (y == 1) yVector = 1;
+      if (y == endY) yVector = -1;
+      if (y == startY) yVector = 1;
       y += yVector;
    }
 }
@@ -37,7 +37,7 @@ void main() {
    // wait for intial glcd module
    delay_us(1000);
    
-   bounchBall();
+   bounchBall(0, 1, 15, 14);
    
 //!   while(1) {
 //!      for(int i = 0; i < 16; i++) {
