@@ -31,6 +31,11 @@ void timer1_isr() {
    counterColumeController();
 }
 
+void stop() {
+   xVector = 0;
+   yVector = 0;
+}
+
 
 void bounchBall() {
 
@@ -39,10 +44,22 @@ void bounchBall() {
    // calculate next position
    if (x == endX) xVector = -1;
    if (x == startX) xVector = 1;
-   x += xVector;
+
    
-   if (y == endY) yVector = -1;
-   if (y == startY) yVector = 1;
+   if (y == endY && yVector == 1) {
+      if (x >= player2 - 1 && x <= player2 + 4) {
+         yVector = -1;
+      }
+      else stop();
+   }
+   if (y == startY && yVector == -1) {
+      if (x >= player1 - 1 && x <= player1 + 4) {
+         yVector = 1;
+      }
+      else stop();
+   }
+
+   x += xVector;
    y += yVector;
 
 }
